@@ -1,7 +1,1 @@
-[
-    {
-        "Roommates": "",
-        "descripcion": "",
-        "Monto": ""
-    }
-]
+[{"Roommates":"","descripcion":"","Monto":""},{"id":1,"roommate_id":"pTkEQ99hcZXCeYdw2MUHa","descripcion":"cloro","monto":5000},{"id":2,"roommate_id":"","descripcion":"cloro","monto":5000},{"id":3,"roommate_id":"7P7TV7oxAFU0oiyic7CEu","descripcion":"cloro","monto":5000},{"id":4,"roommate_id":"M2ZiqZoHCca6FReID8Y9t","descripcion":"cloro","monto":15000}]

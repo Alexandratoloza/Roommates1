@@ -1,30 +1,57 @@
-import { nanoid } from "nanoid";
-import { readFile, writeFile } from "fs/promises";
-import path from "path"
+import { gastosModel } from '../models/gastos.model.js'
 
 
-const __dirname = import.meta.dirname
-const pathFile = path.join(__dirname, "/db/roommates.json")
-const filePath = __dirname + "/db/roommates.json";
-
-
-const getGastos = async (req, res) => {
+export const getAllGastos = async(req, res) =>{
     try {
-        const stringGastos = await readFile(pathFile, 'utf8')
-        const Gastos= JSON.stringify(stringGastos)
-        return res.JSON("Gastos", { Gastos })
+        const gastos = await gastosModel.allGastos();
+        return res.json({gastos});
     } catch (error) {
-        console.log(error)
-        return res.status(500).json({ ok: false })
+        console.error(error)
+        res.json( { ok: false,  error });
     }
 }
 
+export const GastoById = async(req, res)=>{
+    try {
+        const { id } = req.params
+        const gasto = await gastosModel.gastosById(id);
+        return res.json({gasto});
+    } catch (error) {
+        console.error(error);
+        res.json({ ok: false, error});
+    }
+}
 
+export const createGasto = async(req, res)=>{
+    try {
+        const { roommate_id, descripcion, monto} = req.body
+        const gasto = await gastosModel.create({roommate_id, descripcion, monto});
+        return res.json({gasto});
+    } catch (error) {
+        console.error(error);
+        res.json({ok: false, error})
+    }
+}
 
-export const GastosController = {
-    getGastos,
-    //createTodo,
-   // deleteTodo,
-   // updateTodo,
-   // formEditTodo 
+export const updateGasto = async(req, res)=>{
+    try {
+        const { id } = req.query
+        const { roommate_id, descripcion, monto} = req.body
+        const gasto = await gastosModel.updateGastos(id, {roommate_id, descripcion, monto});
+        return res.json({gasto});
+    } catch (error) {
+        console.error(error);
+        res.json({ok: false, error})
+    }
+}
+
+export const deleteGasto = async(req, res)=>{
+    try {
+        const { id } = req.query
+        const gasto = await gastosModel.remove(id);
+        return res.json({gasto});
+    } catch (error) {
+        console.error(error);
+        res.json({ok: false, error})
+    }
 }

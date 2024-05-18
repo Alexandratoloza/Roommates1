@@ -190,8 +190,8 @@ Articulos de limpieza</textarea
             $("#gastosHistorial").append(`
                 <tr>
                   <td>${myRoommate.name}</td>
-                  <td>${g.comment}</td>
-                  <td>${g.amount}</td>
+                  <td>${g.descripcion}</td>
+                  <td>${g.monto}</td>
                   <td class="d-flex align-items-center justify-content-between">
                     <i class="fas fa-edit text-warning" onclick="editGasto('${g.id}')" data-toggle="modal" data-target="#exampleModal"></i>
                     <i class="fas fa-trash-alt text-danger" onclick="deleteGasto('${g.id}')" ></i>
@@ -214,14 +214,14 @@ Articulos de limpieza</textarea
 
       const agregarGasto = async () => {
         const roommate_id = $("#roommatesSelect").val();
-        const comment = $("#descripcion").val();
-        const amount = Number($("#monto").val());
+        const descripcion = $("#descripcion").val();
+        const monto = Number($("#monto").val());
         console.log(`>>>> ${roommate_id}`)
         await axios.post("http://localhost:3000/gastos",
         {
             roommate_id,
-            comment,
-            amount,
+            descripcion,
+            monto,
           }
         )
         
@@ -237,14 +237,14 @@ Articulos de limpieza</textarea
 
       const updateGasto = async () => {
         const roommateSelected = $("#roommatesSelectModal").val();
-        const comment = $("#descripcionModal").val();
-        const amount = Number($("#montoModal").val());
+        const descripcion = $("#descripcionModal").val();
+        const monto = Number($("#montoModal").val());
 
         await axios.put("http://localhost:3000/gastos?id=" + gastoEditing,
         {
             roommate_id: roommateSelected,
-            comment,
-            amount,
+            descripcion,
+            monto,
           }
         )
 
@@ -254,10 +254,10 @@ Articulos de limpieza</textarea
 
       const editGasto = (id) => {
         gastoEditing = id;
-        const { roommate, comment, ammount } = gastos.find((g) => g.id == id);
+        const { roommate, descripcion, monto } = gastos.find((g) => g.id == id);
         $("#roommatesSelectModal").val(roommates);
-        $("#descripcionModal").html(comment);
-        $("#montoModal").val(ammount);
+        $("#descripcionModal").html(descripcion);
+        $("#montoModal").val(monto);
       };
 
       imprimir();

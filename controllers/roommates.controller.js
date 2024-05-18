@@ -3,7 +3,7 @@ import { modelRoommates } from '../models/roommates.model.js';
 
 export const getAllRoommates = async (req, res) => {
     try {
-        const roommates = await modelRoommates.getAllRoommates();
+        const roommates = await modelRoommates.allroommates();
         return res.json({ roommates });
     } catch (error) {
         console.error(error);

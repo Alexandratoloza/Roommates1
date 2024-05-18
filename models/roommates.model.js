@@ -30,7 +30,7 @@ const writeFile = async (filePath, data) => {
     }
 };
 
-// Función para obtener todos los roommates
+
 const allroommates = async () => {
     try {
         const filePath = await readFile(path.join(__dirname, '../db/roommates.json'));
@@ -42,7 +42,7 @@ const allroommates = async () => {
     }
 };
 
-// Función para crear un nuevo roommate
+
 const create = async () => {
     try {
         const filePath = await readFile(path.join(__dirname, '../db/roommates.json'));
